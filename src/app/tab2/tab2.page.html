@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Feed de Filmes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Custom Refresher Properties -->
+
+  <ion-refresher slot="fixed" (ionRefresh)="efeitoRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngFor = "let filme of lista_filmes">
+    <ion-card-header>
+      <ion-img [src]="'https://image.tmdb.org/t/p/w200'+filme.backdrop_path"></ion-img>
+      <ion-card-subtitle>{{filme.release_date}}</ion-card-subtitle>
+      <ion-card-title>{{filme.title}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{filme.overview}}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-list></ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="efeitoScrollInfinito($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Carregando mais filmes...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
